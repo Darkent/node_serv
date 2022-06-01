@@ -1,0 +1,13 @@
+#########
+POST http://localhost:3000/login
+Content-Type: "application/json"
+
+
+{
+    "aaa":"x"
+}
+###
+DELETE http://localhost:3000/orden/3
+
+###
+GET http://localhost:3000/products

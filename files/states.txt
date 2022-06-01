@@ -1,0 +1,5 @@
+1;Activo
+2;Ausente
+3;Pendiente
+4;Desactivado
+5;Mantenimiento
