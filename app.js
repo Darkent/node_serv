@@ -9,7 +9,7 @@ app.use("/files", express.static("uploads"));
 app.listen(process.env.PORT || 3000, () => {
   let p = `./files/products.txt`;
 
-  console.log(path.resolve(p));
+  console.log(path.join(__dirname, p));
 
   console.log("Corriendo...");
 });

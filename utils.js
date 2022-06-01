@@ -13,7 +13,7 @@ util.ordenProperties = () => [
 ];
 util.path = (name) => {
   let p = `./files/${name}.txt`;
-  return path.resolve(p);
+  return path.join(__dirname, p);
 };
 util.readData = async (pathName) => {
   let data = await fs.readFile(util.path(pathName), "utf8");
