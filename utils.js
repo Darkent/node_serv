@@ -1,5 +1,5 @@
 const utils = require("nodemon/lib/utils");
-
+const path = require("path");
 const fs = require("fs").promises;
 
 let util = {};
@@ -11,7 +11,10 @@ util.ordenProperties = () => [
   "file",
   "userId",
 ];
-util.path = (name) => `./files/${name}.txt`;
+util.path = (name) => {
+  let p = `./files/${name}.txt`;
+  return path.resolve(p);
+};
 util.readData = async (pathName) => {
   let data = await fs.readFile(util.path(pathName), "utf8");
 
