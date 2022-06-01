@@ -57,7 +57,10 @@ controller.register = async (req, res) => {
     let isNew = await util.checkemail(email);
     if (isNew) {
       let id = await util.setId("ordens");
-      await util.writeData("emails", `\r\n${id};${email};${password};guest`);
+      await util.writeData(
+        "emails",
+        `${util.separate()}${id};${email};${password};guest`
+      );
       const token = jwt.sign({ email }, '$"#FDSEWw5dsa5');
       return res.json({ sucess: true, token, id });
     } else {
@@ -124,7 +127,10 @@ controller.createOrden = async (req, res) => {
         filename,
         userId,
       };
-      await util.writeData("ordens", `${Object.values(orden).join(";")}\r\n`);
+      await util.writeData(
+        "ordens",
+        `${Object.values(orden).join(";")}${util.separate()}`
+      );
       res.json({ success: true, orden });
     } else {
       if (req.file) {

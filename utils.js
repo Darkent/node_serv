@@ -1,8 +1,18 @@
 const utils = require("nodemon/lib/utils");
+const { type } = require("os");
 const path = require("path");
 const fs = require("fs").promises;
 
 let util = {};
+
+util.separate = () => {
+  let os = type();
+  if (os.toLowerCase().includes("windows")) {
+    return "\r\n";
+  } else {
+    return "\n";
+  }
+};
 util.ordenProperties = () => [
   "id",
   "date",
@@ -43,7 +53,7 @@ util.checkemail = async (toFind) => {
   let data = await util.readData("users");
 
   if (data) {
-    data = data.split("\r\n");
+    data = data.split(util.separate());
 
     if (data.length == 0) {
       return true;
@@ -73,7 +83,7 @@ util.formatData = async (args, path) => {
   let data = await util.readData(path);
   //
 
-  data = data.split("\r\n");
+  data = data.split(util.separate());
 
   if (data.length == 0) {
     return [];
@@ -119,7 +129,7 @@ util.struct = (datas, type, value) => {
     }
     return `${key};${val}`;
   });
-  data = data.join("\r\n");
+  data = data.join(util.separate());
   return data;
 };
 util.formatSave = (datas) => {
@@ -134,11 +144,11 @@ util.formatSave = (datas) => {
     });
     return record;
   });
-  data = data.join("\r\n");
+  data = data.join(util.separate());
   return data;
 };
 util.destruct = (data) => {
-  data = data.split("\r\n").map((i) => {
+  data = data.split(util.separate()).map((i) => {
     const [type, id] = i.split(";");
     return {
       [type]: id,

@@ -4,7 +4,7 @@ const product = {};
 product.getProducts = async (req, res) => {
   let data = await util.readData("products");
 
-  data = data.split("\r\n").map((i) => {
+  data = data.split(util.separate()).map((i) => {
     const [id, name, size, color, itemCode, price, stock, stock_min, image] =
       i.split(";");
     return {
@@ -42,7 +42,7 @@ product.setProduct = async (req, res) => {
 };
 product.getColors = async (req, res) => {
   let data = await util.readData("colors");
-  data = data.split("\r\n").map((i) => {
+  data = data.split(util.separate()).map((i) => {
     const [id, description] = i.split(";");
     return {
       id,
@@ -55,7 +55,7 @@ product.getColors = async (req, res) => {
 
 product.getSizes = async (req, res) => {
   let data = await util.readData("sizes");
-  data = data.split("\r\n").map((i) => {
+  data = data.split(util.separate()).map((i) => {
     const [id, size] = i.split(";");
     return {
       id,
